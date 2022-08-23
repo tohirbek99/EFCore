@@ -33,11 +33,7 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.PageId">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.PageId">Details</a> |
-                    @if(item.Slug!="home")
-                    {
                     <a class="confirmDeletion" asp-action="Delete" asp-route-id="@item.PageId">Delete</a>
-                    }
-
                 </td>
             </tr>
         }
