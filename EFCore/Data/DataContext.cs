@@ -11,5 +11,7 @@ namespace EFCore.Data
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Page> Pages { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
     }
 }

@@ -13,7 +13,9 @@ namespace EFCore.Areas.Admin.Controllers
         {
             this.context = context;
         }
+            
 
+        // GET /admin/pages
         public async Task<IActionResult> Index()
         {
             IQueryable<Page> pages = from p in context.Pages orderby p.Sorting select p;
@@ -21,6 +23,8 @@ namespace EFCore.Areas.Admin.Controllers
             ViewBag.Fruit = "Apples";
             return View(Plist);
         }
+
+        // GET /admin/pages/details/5
         public async Task<IActionResult> Details(int id)
         {
             Page page = await context.Pages.FirstOrDefaultAsync(x => x.PageId == id);
@@ -30,11 +34,16 @@ namespace EFCore.Areas.Admin.Controllers
             }
             return View(page);
         }
+
+        // GET /admin/page/create/5
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
+
+
+        // POST /admin/page/create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Page page)
@@ -54,8 +63,11 @@ namespace EFCore.Areas.Admin.Controllers
                 TempData["Success"] = "The page has been Added!";
                 return RedirectToAction("Index");
             }
-            return View();
+
+            return View(page);
         }
+
+        // GET /admin/page/edit/5
         public async Task<IActionResult> Edit(int id)
         {
             Page page = await context.Pages.FindAsync(id);
@@ -65,7 +77,10 @@ namespace EFCore.Areas.Admin.Controllers
             }
             return View(page);
         }
-            [HttpPost]
+
+
+        // POST /admin/page/edit
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Page page)
         {
@@ -87,6 +102,9 @@ namespace EFCore.Areas.Admin.Controllers
             }
             return View(page);
         }
+
+        // GET /admin/page/delete/5
+
         public async Task<IActionResult> Delete(int id)
         {
             Page page = await context.Pages.FindAsync(id);
@@ -102,6 +120,27 @@ namespace EFCore.Areas.Admin.Controllers
                 TempData["Error"] = "The page hes been Deleted!";
             }
             return RedirectToAction("Index");
+        }
+
+
+        // POST /admin/page/reprder
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reorder(int[] id)
+        {
+            int count = 1;
+
+            foreach (var pageId in id)
+            {
+                Page page = await context.Pages.FindAsync(pageId);
+                page.Sorting=count;
+                context.Update(page);
+                await context.SaveChangesAsync();
+                count++;
+
+            }
+            return Ok();
         }
     }
 }
