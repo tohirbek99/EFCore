@@ -9,9 +9,10 @@ namespace EFCore.Data
         {
 
         }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Product> Users { get; set; }
         public DbSet<Page> Pages { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products {get; set; }
 
     }
 }

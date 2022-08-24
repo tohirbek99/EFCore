@@ -124,7 +124,6 @@ namespace EFCore.Areas.Admin.Controllers
 
 
         // POST /admin/page/reprder
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reorder(int[] id)
