@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-md-10">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
            
             <div class="form-group">
@@ -37,12 +37,13 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
+                <label asp-for="Image" class="control-label">Product Image</label>
+                <input asp-for="ImageUpload" class="form-control" />
+                <img src="" id="imgpreview" alt="" />
+                <span asp-validation-for="ImageUpload  " class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group"> 
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -58,5 +59,10 @@
 
     <script>
         CKEDITOR.replace("Description")
+
+
+        $("#ImageUpload").change(function(){
+            realURL(this);
+        });
     </script>
 }
