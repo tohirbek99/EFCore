@@ -37,14 +37,14 @@
                 <td>
                     @item.Name
                 </td>
-                <td>
+               <td>
                     @item.Price
                 </td>
                 <td>
                     @item.Category.Name
                 </td>
                 <td>
-                    @item.Image
+                    Image
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ProductId">Edit</a> |
@@ -55,3 +55,6 @@
         }
     </tbody>
 </table>
+<div class="d-flex w-100 justify-content-center">
+    <Pagination page-count="@ViewBag.TotalPages" page-target="/admin/products" page-number="@ViewBag.PageNumer" page-range="@ViewBag.PageRange"></Pagination>
+</div>

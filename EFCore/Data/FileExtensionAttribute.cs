@@ -6,9 +6,14 @@ namespace EFCore.Data
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
+            //var conttext=(DataContext)validationContext.GetService(typeof(DataContext));
+
+
             var file=value as IFormFile;
+            
             if (file != null)
             {
+
                 var extension=Path.GetExtension(file.FileName);
                 string[] extensions = { "jpg", "png" };
                 bool result=extensions.Any(x=> extension.EndsWith(x));
@@ -22,7 +27,7 @@ namespace EFCore.Data
 
         private string GetErrorMessage()
         {
-            return "Allowed extensions are jpg and png";
+            return "Allowed extensions are jpg and png.";
         }
     }
 }
